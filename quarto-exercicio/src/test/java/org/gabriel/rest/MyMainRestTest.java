@@ -21,10 +21,7 @@ public class MyMainRestTest {
     @Order(1)
     void testCarroEconomicoAsString() {
 
-        CarroEconomico carroEconomico = new CarroEconomico("Celta");
         String actual = new CarroEconomico("Celta").toString();
-
-        System.out.println("Testando testCarroEconomicoAsString: " + carroEconomico.toString());
 
         given()
           .when().get("/exercicio/carroEconomicoAsString")
@@ -37,10 +34,7 @@ public class MyMainRestTest {
     @Order(2)
     void testCarroEconomicoPrecoDiariaAsString() {
 
-        CarroEconomico carroEconomico = new CarroEconomico("Celta");
-        String actual = new CarroEconomico("Celta").getPrecoBaseLocacao().toString();
-
-        System.out.println("Testando testCarroEconomicoPrecoDiariaAsString: " + carroEconomico.toString());
+        String actual = "105,00";
 
         given()
           .when().get("/exercicio/carroEconomicoPrecoDiariaAsString")
@@ -49,16 +43,26 @@ public class MyMainRestTest {
              .body(is(actual));
     }
 
+    @Test
+    @Order(3)
+    void testCarroEconomicoPrecoDiariaAlteradoAsString() {
+
+        String actual = "210,00";
+
+        given()
+          .when().get("/exercicio/carroEconomicoPrecoDiariaAlteradoAsString")
+          .then()
+             .statusCode(200)
+             .body(is(actual));
+    }
+
     
     // CarroIntermediario
     @Test
-    @Order(3)
+    @Order(4)
     void testCarroIntermediarioAsString() {
 
-        CarroIntermediario carroIntermediario = new CarroIntermediario("HB20");
         String actual = new CarroIntermediario("HB20").toString();
-
-        System.out.println("Testando testCarroIntermediarioAsString: " + carroIntermediario.toString());
 
         given()
           .when().get("/exercicio/carroIntermediarioAsString")
@@ -68,13 +72,10 @@ public class MyMainRestTest {
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void testCarroIntermediarioPrecoDiariaAsString() {
 
-        CarroIntermediario carroIntermediario = new CarroIntermediario("HB20");
-        String actual = new CarroIntermediario("HB20").getPrecoBaseLocacao().toString();
-
-        System.out.println("Testando testCarroIntermediarioPrecoDiariaAsString: " + carroIntermediario.toString());
+        String actual = "110,00";
 
         given()
           .when().get("/exercicio/carroIntermediarioPrecoDiariaAsString")
@@ -86,12 +87,10 @@ public class MyMainRestTest {
 
     // MainRotinas
     @Test
-    @Order(5)
+    @Order(6)
     void testQuantidadeObjetosCriadosAsString() {
 
-        String actual = "4";
-
-        System.out.println("Testando testQuantidadeObjetosCriadosAsString");
+        String actual = "5";
 
         given()
           .when().get("/exercicio/quantidadeObjetosCriadosAsString")

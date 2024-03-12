@@ -4,7 +4,7 @@ import org.gabriel.models.abstractClass.Carro;
 
 public class CarroIntermediario extends Carro {
 
-    private static final double VALOR_ACRESCIMENTO = 110.0;
+    private static final Double VALOR_ACRESCIMENTO = 1.10;
 
     Double baseAcrescimento = VALOR_ACRESCIMENTO;
 

@@ -29,6 +29,13 @@ public class MyMainRest {
         return mainRotinas.carroEconomicoPrecoDiariaAsString();
     }
 
+    @GET
+    @Path("/carroEconomicoPrecoDiariaAlteradoAsString")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String carroEconomicoPrecoDiariaAlteradoAsString() {
+        return mainRotinas.carroEconomicoPrecoDiariaAlteradoAsString();
+    }
+
 
     // CarroIntermediario
     @GET
