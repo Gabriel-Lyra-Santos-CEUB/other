@@ -171,5 +171,22 @@ public class MyMainRestTest {
     System.out.println("###changeTitularNameThroughContaThenTitularAsString: " + response);
 
   }
+
+  @Test
+  @Order(9)
+  void testTitularThroughContaAsString() {
+
+    String response = given()
+        .when().get("/exercicio/titularThroughContaAsString")
+        .then()
+          .statusCode(200)
+        .and()
+          .extract()
+          .body()
+          .asString();
+
+    System.out.println("###testTitularThroughContaAsString: " + response);
+
+  }
     
 }

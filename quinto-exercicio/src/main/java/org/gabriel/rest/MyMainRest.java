@@ -74,5 +74,12 @@ public class MyMainRest {
     public String changeTitularNameThroughContaThenTitularAsString() {
         return mainRotinas.changeTitularNameThroughContaThenTitularAsString();
     }
+
+    @GET
+    @Path("/titularThroughContaAsString")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String titularThroughContaAsString() {
+        return mainRotinas.titularThroughContaAsString();
+    }
     
 }

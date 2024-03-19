@@ -23,8 +23,12 @@ public class Titular {
 
     @Override
     public String toString() {
-        return "Titular [nomeTitular=" + nomeTitular + ", sobrenomeTitular=" + sobrenomeTitular + ", cpfTitular="
-                + cpfTitular + "]";
+        return "Titular " + 
+            "[" + 
+            "nomeTitular=" + this.nomeTitular + 
+            ", sobrenomeTitular=" + this.sobrenomeTitular + 
+            ", cpfTitular=" + this.cpfTitular + 
+            "]";
     }
 
     public String memoryAddress() {

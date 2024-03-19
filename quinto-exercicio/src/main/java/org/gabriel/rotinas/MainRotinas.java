@@ -54,5 +54,9 @@ public class MainRotinas {
         conta.getTitular().setNomeTitular("Rafael");
         return titularAsString();
     }
+
+    public String titularThroughContaAsString(){
+        return this.conta.getTitular().toString();
+    }
     
 }
