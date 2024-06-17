@@ -1,0 +1,101 @@
+from mysql.connector import connect, Error
+
+class Conexao:
+def __init__(self, host='localhost', user='root', pwd='', db='db_cadastro'):
+self.host = host
+self.user = user
+self.pwd = pwd
+self.db = db
+self.conexao = None
+self.cursor = None
+
+def conecta(self):
+try:
+self.conexao = connect(
+host=self.host,
+user=self.user,
+password=self.pwd,
+database=self.db
+)
+self.cursor = self.conexao.cursor()
+print("Conectado ao banco de dados")
+except Error as e:
+print(f"Erro ao conectar ao banco de dados: {e}")
+
+def desconecta(self):
+if self.conexao:
+self.cursor.close()
+self.conexao.close()
+self.conexao = None
+self.cursor = None
+print("Desconectado do banco de dados")
+
+def executa_dml(self, sql):
+if not self.conexao or not self.cursor:
+print("Conexão não estabelecida.")
+return
+try:
+self.cursor.execute(sql)
+self.conexao.commit()
+print("DML executada com sucesso")
+except Error as e:
+print(f"Erro ao executar DML: {e}")
+
+def executa_dql(self, sql):
+if not self.conexao or not self.cursor:
+print("Conexão não estabelecida.")
+return []
+try:
+self.cursor.execute(sql)
+resultado = self.cursor.fetchall()
+return resultado
+except Error as e:
+print(f"Erro ao executar DQL: {e}")
+return []
+
+
+
+
+
+from poo_connection import Conexao
+
+# Instanciando um objeto da classe Conexao
+conexao = Conexao(host='localhost', user='root', pwd='sua_senha', db='db_cadastro')
+
+# Conectando ao banco de dados
+conexao.conecta()
+
+# Criando a tabela td_cargo para os testes
+conexao.executa_dml('''
+CREATE TABLE IF NOT EXISTS td_cargo (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(255) NOT NULL
+)
+''')
+
+# Testando o método executa_dml com um insert na tabela td_cargo
+conexao.executa_dml("INSERT INTO td_cargo (nome) VALUES ('Desenvolvedor')")
+
+# Testando o método executa_dql com um select na tabela td_cargo
+resultado = conexao.executa_dql("SELECT * FROM td_cargo")
+print("Resultado do SELECT:", resultado)
+
+# Testando o método executa_dml com um delete na tabela td_cargo
+conexao.executa_dml("DELETE FROM td_cargo WHERE nome = 'Desenvolvedor'")
+
+# Verificando se o registro foi deletado
+resultado = conexao.executa_dql("SELECT * FROM td_cargo")
+print("Resultado do SELECT após DELETE:", resultado)
+
+# Inserindo um novo registro para testar o update
+conexao.executa_dml("INSERT INTO td_cargo (nome) VALUES ('Analista')")
+
+# Testando o método executa_dml com um update na tabela td_cargo
+conexao.executa_dml("UPDATE td_cargo SET nome = 'Senior Analista' WHERE nome = 'Analista'")
+
+# Verificando se o registro foi atualizado
+resultado = conexao.executa_dql("SELECT * FROM td_cargo")
+print("Resultado do SELECT após UPDATE:", resultado)
+
+# Desconectando do banco de dados
+conexao.desconecta()
