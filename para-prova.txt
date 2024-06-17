@@ -53,6 +53,20 @@ except Error as e:
 print(f"Erro ao executar DQL: {e}")
 return []
 
+def cria_banco(self):
+        try:
+            conexao = connect(
+                host=self.host,
+                user=self.user,
+                password=self.pwd
+            )
+            cursor = conexao.cursor()
+            cursor.execute(f"CREATE DATABASE IF NOT EXISTS {self.db}")
+            cursor.close()
+            conexao.close()
+            print(f"Banco de dados '{self.db}' criado ou já existe")
+        except Error as e:
+            print(f"Erro ao criar o banco de dados: {e}")
 
 
 
